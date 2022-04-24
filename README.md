@@ -1,4 +1,4 @@
-# Example app to test the Geidea flutter plugin
+# Example
 
 An example  app to test the Geidea flutter plugin
 
