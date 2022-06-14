@@ -393,7 +393,7 @@ class _CheckoutFlowState extends State<CheckoutFlow> {
       } catch (e) {
         setState(() => _checkoutInProgress = false);
         _showMessage(e.toString());
-        rethrow;
+        //rethrow;
       }
     }
   }
