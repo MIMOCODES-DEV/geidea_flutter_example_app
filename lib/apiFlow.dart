@@ -41,7 +41,7 @@ class _ApiFlowState extends State<ApiFlow> {
   bool _checkoutInProgress = false;
   String _apiAmount = "100";
   String _checkoutAmount = "100";
-  final String _currency = "EGP";
+  String _currency = "EGP";
   final String _callbackUrl = "https://returnurl.com";
   final String _returnUrl ="https://returnurl.com";
   final bool _cardOnFile = true;
@@ -83,15 +83,38 @@ class _ApiFlowState extends State<ApiFlow> {
                 const Text("APIs Flow", style: TextStyle(
                     fontSize: 21.0, fontWeight: FontWeight.bold)),
                 _verticalSizeBox,
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Amount',
-                  ),
-                  initialValue: _apiAmount,
-                  validator: validateNumber('amount'),
-                  onSaved: (String? value) => _apiAmount = value!,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child:
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Amount',
+                        ),
+                        initialValue: _apiAmount,
+                        validator: validateNumber('amount'),
+                        onSaved: (String? value) => _apiAmount = value!,
+                      ),
+                    ),
+                    _horizontalSizeBox,
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Currency',
+                        ),
+                        onSaved: (String? value) =>
+                        _currency = (value ?? "EGP"),
+                        initialValue: _currency,
+                      ),
+                    ),
+                  ],
                 ),
                 _verticalSizeBox,
                 TextFormField(
@@ -298,7 +321,6 @@ class _ApiFlowState extends State<ApiFlow> {
       InitiateAuthenticationRequestBody(_apiAmount, _currency, card?.number,
           callbackUrl: _callbackUrl,
           cardOnFile: _cardOnFile);
-
       try {
         AuthenticationApiResponse response = await plugin
             .initiateAuthentication(
