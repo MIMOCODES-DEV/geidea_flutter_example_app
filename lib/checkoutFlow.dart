@@ -359,8 +359,8 @@ class _CheckoutFlowState extends State<CheckoutFlow> {
 
   _handleCheckout(BuildContext context) async {
     FocusScope.of(context).unfocus();
-    Address billing = Address(city: bCity, countryCode: bCountry, street: bStreet, postCode: bPostal);
-    Address shipping = Address(city: sCity, countryCode: sCountry, street: sStreet, postCode: sPostal);
+    Address billingAddress = Address(city: bCity, countryCode: bCountry, street: bStreet, postCode: bPostal);
+    Address shippingAddress = Address(city: sCity, countryCode: sCountry, street: sStreet, postCode: sPostal);
 
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -368,8 +368,8 @@ class _CheckoutFlowState extends State<CheckoutFlow> {
           _checkoutAmount, _currency,
           callbackUrl: callbackUrl,
           lang: radioButtonLangItem,
-          billing: billing,
-          shipping: shipping,
+          billingAddress: billingAddress,
+          shippingAddress: shippingAddress,
         customerEmail: customerEmail,
         merchantReferenceID: merchantReferenceID,
         paymentIntentId: paymentIntentID,
